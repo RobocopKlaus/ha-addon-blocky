@@ -1,0 +1,17 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Add-on: Blocky
+# Configures Blocky
+# ==============================================================================
+
+# Logging the start of the configuration
+bashio::log.info "Starting Blocky configuration"
+
+tempio \
+  -conf /data/options.json \
+  -template /etc/blocky/templates/config.gtpl \
+  -out /etc/blocky/config.yaml
+
+# Logging the completion of the configuration
+bashio::log.info "Blocky configuration completed"

@@ -1,0 +1,49 @@
+---
+configuration:
+  router:
+    name: Router IP Address
+    description: >
+      Configure a DNS server for client lookup, typically your router.
+      Blocky uses reverse DNS (rDNS) to identify client names.
+
+  defaultUpstreamResolvers:
+    name: Default DNS resolvers
+    description: >
+      Specify external DNS resolvers for query resolution. Supported protocols
+      include UDP/TCP (tcp+udp), DNS over HTTPS (https), and DNS over TLS (tcp-tls).
+
+  bootstrapDns:
+    name: Bootstrap DNS Servers
+    description: >
+      Define DNS servers for resolving blacklist URLs and upstream DNS servers by
+      hostname. These are used if no system DNS resolver is configured or to encrypt
+      bootstrap queries. Specify just the upstream for IP-based upstreams, omitting
+      the ips field.
+
+  conditionalMapping:
+    name: Domain-Specific DNS Resolvers
+    description: >
+      Redirect DNS queries for specific domains (and their subdomains) to designated
+      DNS resolvers. Useful for routing local network queries to your router, as it
+      can map hostnames to IP addresses within your network.
+
+  blackLists:
+    name: Blacklist Groups and Sources
+    description: >
+      Configure groups of external blacklists to block domains or IPs (e.g., ads,
+      malware). Supports Hosts format, plain domain lists, and regex patterns. Use
+      DNS sinkholing to block queries, checking request domains, response IPs, and
+      CNAME records against these blacklists. Include whitelists to prevent
+      over-blocking.
+
+  clientGroupsBlock:
+    name: Client-Specific Blocking Groups
+    description: >
+      Assign blocking groups to specific network clients. Use client names, IPs,
+      FQDNs, or CIDR notations for identification. Clients are assigned to the default
+      group if no specific group is set. Blocky resolves FQDNs to apply group settings
+      based on IP matches.
+
+network:
+  53/udp: UDP port for DNS requests.
+  53/tcp: TCP port for DNS requests.

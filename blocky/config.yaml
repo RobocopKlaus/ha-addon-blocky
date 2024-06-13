@@ -1,0 +1,59 @@
+---
+name: Blocky
+version: dev
+slug: blocky
+description: Lightweight DNS proxy as ad-blocker for local network with many features
+url: https://github.com/robocopklaus/hassio-addon-blocky/tree/main/README.md
+startup: system
+arch:
+  - i386
+  - amd64
+  - armhf
+  - armv7
+  - aarch64
+init: false
+ports:
+  53/udp: 53
+  53/tcp: 53
+options:
+  router: null
+  defaultUpstreamResolvers:
+    - tcp-tls:one.one.one.one
+    - tcp-tls:dns.google
+    - https://cloudflare-dns.com/dns-query
+  bootstrapDns:
+    - upstream: tcp+udp:1.1.1.1
+  conditionalMapping: []
+
+  blackLists:
+    - group: none
+      entries: []
+    - group: ads
+      entries:
+        - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+        - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+        - http://sysctl.org/cameleon/hosts
+        - https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
+  clientGroupsBlock:
+    - client: default
+      groups:
+        - ads
+schema:
+  router: str
+  defaultUpstreamResolvers:
+    - str
+  bootstrapDns:
+    - upstream: str?
+      ips:
+        - str?
+  conditionalMapping:
+    - domain: str
+      ip: str
+  blackLists:
+    - group: str
+      entries:
+        - str
+  clientGroupsBlock:
+    - client: str
+      groups:
+        - str

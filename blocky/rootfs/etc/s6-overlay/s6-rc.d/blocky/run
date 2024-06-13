@@ -1,0 +1,9 @@
+#!/command/with-contenv bashio
+# shellcheck shell=bash
+# ==============================================================================
+# Home Assistant Add-on: Blocky
+# Runs Blocky
+# ==============================================================================
+bashio::log.info "Starting Blocky..."
+
+exec blocky --config /etc/blocky/config.yaml
